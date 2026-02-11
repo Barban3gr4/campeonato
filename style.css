@@ -22,8 +22,8 @@
 
 body {
   background: 
-    linear-gradient(rgba(11, 14, 19, 0.5), rgba(11, 14, 19, 0.7)),
-    url('img/Azhz8Qq9Vu.png');
+    linear-gradient(rgba(11, 14, 19, 0.7), rgba(11, 14, 19, 0.8)),
+    url('img/campeonato.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -449,25 +449,40 @@ tr:nth-child(2).qualifier-row {
 
 .match-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0.75rem 0;
   font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition);
+  gap: 10px;
 }
 
-.match-item:hover {
-  color: var(--primary);
+.match-item span:first-child,
+.match-item span:last-child {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-item span:first-child {
+  text-align: right;
+}
+
+.match-item span:last-child {
+  text-align: left;
 }
 
 .match-score {
   background: rgba(255, 255, 255, 0.05);
-  padding: 2px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
   font-weight: 700;
-  min-width: 45px;
+  min-width: 60px;
   text-align: center;
+  color: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Bracket Styling */
@@ -502,7 +517,8 @@ tr:nth-child(2).qualifier-row {
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: visible; /* Permitir que o VS flutue */
+  overflow: visible;
+  width: 250px; /* Largura fixa para manter alinhamento vertical */
 }
 
 .bracket-vs {
