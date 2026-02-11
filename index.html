@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Championship Elite | Gerenciador de Torneios</title>
+    <meta
+      name="description"
+      content="Sistema profissional para criação e gestão de campeonatos com grupos e eliminatórias."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="dark-theme">
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <img src="img/Azhz8Qq9Vu.png" alt="Logo">
+          </div>
+          <h1>Elite<span>Championship</span></h1>
+        </div>
+        <nav>
+          <button class="nav-item active" data-view="setup">
+            <span class="icon">⚙️</span> Configuração
+          </button>
+          <button class="nav-item" data-view="groups" id="nav-groups">
+            <span class="icon">👥</span> Grupos
+          </button>
+          <button class="nav-item" data-view="brackets" id="nav-brackets">
+            <span class="icon">🎋</span> Eliminatórias
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <button id="reset-btn" class="secondary-btn">Reiniciar Tudo</button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <!-- SETUP VIEW -->
+        <section id="view-setup" class="view active">
+          <div class="header">
+            <h2>Novo Campeonato</h2>
+            <p>Configure os parâmetros iniciais do seu torneio.</p>
+          </div>
+
+          <div class="card glass">
+            <form id="setup-form">
+              <div class="form-group">
+                <label for="tournament-name">Nome do Torneio</label>
+                <input
+                  type="text"
+                  id="tournament-name"
+                  placeholder="Ex: Copa do Mundo 2026"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="team-names-list">Nomes dos Times (um por linha)</label>
+                <textarea id="team-names-list" rows="5" placeholder="Digite ou cole os nomes aqui...&#10;Exemplo:&#10;Furia&#10;G2&#10;Spirit"></textarea>
+                <div class="input-hint">
+                  <span class="icon">ℹ️</span>
+                  <span>Os nomes restantes serão preenchidos automaticamente.</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="num-groups">Quantidade de Grupos</label>
+                  <input type="number" id="num-groups" min="1" value="4" required>
+                </div>
+                <div class="form-group">
+                  <label for="teams-per-group">Times por Grupo</label>
+                  <input type="number" id="teams-per-group" min="2" value="4" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="qualifiers-per-group">Classificados por Grupo</label>
+                <input type="number" id="qualifiers-per-group" min="1" value="2" required>
+              </div>
+
+              <button type="submit" class="primary-btn">
+                Iniciar Campeonato
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- GROUPS VIEW -->
+        <section id="view-groups" class="view">
+          <div class="header">
+            <h2 id="display-tournament-name">Grupos</h2>
+            <div class="actions">
+              <button class="secondary-btn" id="generate-bracket-btn">
+                Gerar Eliminatórias
+              </button>
+            </div>
+          </div>
+
+          <div id="groups-container" class="groups-grid">
+            <!-- Groups will be injected here -->
+          </div>
+        </section>
+
+        <!-- BRACKETS VIEW -->
+        <section id="view-brackets" class="view">
+          <div class="header">
+            <h2>Fase Final</h2>
+            <p>O caminho para a glória eterna.</p>
+          </div>
+
+          <div id="brackets-container" class="bracket-wrapper">
+            <!-- Brackets will be injected here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-match" class="modal">
+      <div class="modal-content glass">
+        <span class="close">&times;</span>
+        <h3>Resultado da Partida</h3>
+        <div class="match-setup-bo3">
+          <div class="team-names-header">
+            <span id="modal-team1-name" class="team-name">Time A</span>
+            <span class="vs-header">vs</span>
+            <span id="modal-team2-name" class="team-name">Time B</span>
+          </div>
+          
+          <div class="map-row">
+            <span class="map-label">Mapa 1</span>
+            <div class="map-inputs">
+              <input type="number" id="score1_m1" class="map-score" min="0" placeholder="0" />
+              <span>:</span>
+              <input type="number" id="score2_m1" class="map-score" min="0" placeholder="0" />
+            </div>
+          </div>
+
+          <div class="map-row">
+            <span class="map-label">Mapa 2</span>
+            <div class="map-inputs">
+              <input type="number" id="score1_m2" class="map-score" min="0" placeholder="0" />
+              <span>:</span>
+              <input type="number" id="score2_m2" class="map-score" min="0" placeholder="0" />
+            </div>
+          </div>
+
+          <div class="map-row">
+            <span class="map-label">Mapa 3</span>
+            <div class="map-inputs">
+              <input type="number" id="score1_m3" class="map-score" min="0" placeholder="0" />
+              <span>:</span>
+              <input type="number" id="score2_m3" class="map-score" min="0" placeholder="0" />
+            </div>
+          </div>
+        </div>
+        <button id="save-match-btn" class="primary-btn">
+          Salvar Resultado
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
